@@ -3,7 +3,7 @@
 import { useReducer } from 'react';
 import {
   emptyResume, sampleResume, emptyExperience, emptyEducation, emptyProject, emptySkillGroup,
-  type Resume, type Profile, type ExperienceEntry, type EducationEntry, type ProjectEntry, type SkillGroup,
+  type Resume, type Profile,
 } from '@/lib/resume';
 
 export type ListSection = 'experience' | 'education' | 'projects' | 'skills';
