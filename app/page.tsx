@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react';
 import { useResume } from '@/hooks/useResume';
 import { loadResume, saveResume, isStorageAvailable } from '@/lib/storage';
 import { FormPanel } from '@/components/form/FormPanel';
+import { ResumePreview } from '@/components/preview/ResumePreview';
 
 export default function Home() {
   const [resume, dispatch] = useResume();
@@ -28,10 +29,8 @@ export default function Home() {
       <section className="no-print h-dvh overflow-y-auto border-r border-[var(--border)] bg-[var(--surface)]">
         <FormPanel resume={resume} dispatch={dispatch} />
       </section>
-      <section className="flex justify-center overflow-y-auto bg-[var(--bg)] p-8">
-        <div className="rounded-lg border border-dashed border-[var(--border)] p-8 text-sm text-[var(--fg-dim)]">
-          Preview lands in the next step.
-        </div>
+      <section className="flex justify-center overflow-auto bg-[var(--bg)] p-8">
+        <ResumePreview resume={resume} />
       </section>
     </div>
   );
