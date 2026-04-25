@@ -47,7 +47,7 @@ export default function Home() {
         <section className="no-print h-full overflow-y-auto border-r border-[var(--border)] bg-[var(--surface)]">
           <FormPanel resume={resume} dispatch={dispatch} />
         </section>
-        <section className="flex justify-center overflow-auto bg-[var(--bg)] p-8">
+        <section className="print-canvas flex justify-center overflow-auto bg-[var(--bg)] p-8">
           <ResumePreview resume={resume} />
         </section>
       </div>

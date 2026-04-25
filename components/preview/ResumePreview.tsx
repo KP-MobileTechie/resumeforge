@@ -33,7 +33,7 @@ export function ResumePreview({ resume }: Props) {
   return (
     /* Scale wrapper — shrinks the 210mm page to fit narrower viewports on screen.
        The print CSS resets transform to none so the page prints true-size. */
-    <div style={{ transform: 'scale(var(--preview-scale, 0.85))', transformOrigin: 'top center' }}>
+    <div className="preview-scale" style={{ transform: 'scale(var(--preview-scale, 0.85))', transformOrigin: 'top center' }}>
       <div
         className={`resume-page ${sp.text}`}
         style={{ fontFamily: fontFamily(theme.bodyFont) }}

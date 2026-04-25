@@ -32,8 +32,11 @@ body { background: var(--bg); color: var(--fg); font-family: var(--font-sans), s
 
 @media print {
   @page { size: A4; margin: 0; }
-  body { background: #fff; }
+  html, body { background: #fff; }
   .no-print { display: none !important; }
+  /* Neutralize the on-screen scale and the grey canvas padding so the PDF is true A4. */
+  .preview-scale { transform: none !important; }
+  .print-canvas { padding: 0 !important; background: #fff !important; overflow: visible !important; display: block !important; }
   .resume-page { box-shadow: none; transform: none !important; margin: 0; }
   * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 }
