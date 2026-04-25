@@ -9,6 +9,12 @@ export const metadata: Metadata = {
   title: 'resumeforge — build a clean résumé, export to PDF',
   description:
     'A résumé builder with a live A4 preview, three print-ready themes, and one-click PDF export straight from the browser. No sign-up.',
+  metadataBase: new URL('https://resumeforge.vercel.app'), // update to real URL after deploy
+  openGraph: {
+    title: 'resumeforge — build a clean résumé, export to PDF',
+    description: 'Live A4 preview, three print-ready themes, one-click PDF export. No sign-up.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
