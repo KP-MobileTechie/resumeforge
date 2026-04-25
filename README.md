@@ -8,7 +8,7 @@ download with one click. No sign-up, no backend, your data stays in your browser
 
 <!-- TODO(manual): record demo GIF with ScreenToGif and replace this line -->
 
-**Live demo:** https://resumeforge.vercel.app
+**Live demo:** https://resumeforge-five-sigma.vercel.app
 
 ## Features
 
