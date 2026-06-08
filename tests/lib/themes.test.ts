@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest';
 import { THEMES, THEME_LIST, getTheme } from '@/lib/themes';
 
 describe('themes', () => {
-  it('has three themes', () => {
-    expect(THEME_LIST).toHaveLength(3);
+  it('has four themes', () => {
+    expect(THEME_LIST).toHaveLength(4);
   });
   it('each theme has a complete token set and id matches key', () => {
     for (const [key, t] of Object.entries(THEMES)) {

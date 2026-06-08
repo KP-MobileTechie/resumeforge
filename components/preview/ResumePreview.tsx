@@ -4,6 +4,7 @@ import { fontFamily, spacing } from './themeStyle';
 import { ClassicTheme } from './themes/ClassicTheme';
 import { ModernTheme } from './themes/ModernTheme';
 import { CompactTheme } from './themes/CompactTheme';
+import { MinimalTheme } from './themes/MinimalTheme';
 
 interface Props {
   resume: Resume;
@@ -52,6 +53,8 @@ export function ResumePreview({ resume }: Props) {
           <ClassicTheme resume={resume} theme={theme} />
         ) : theme.id === 'compact' ? (
           <CompactTheme resume={resume} theme={theme} />
+        ) : theme.id === 'minimal' ? (
+          <MinimalTheme resume={resume} theme={theme} />
         ) : (
           <ModernTheme resume={resume} theme={theme} />
         )}
