@@ -2,17 +2,24 @@
 
 import { THEME_LIST } from '@/lib/themes';
 
+import { useRef } from 'react';
+
 interface TopBarProps {
   themeId: string;
   onTheme: (id: string) => void;
   onSample: () => void;
   onReset: () => void;
   onDownload?: () => void;
+  onExport: () => void;
+  onImport: (file: File) => void;
   storageOk: boolean;
 }
 
-export function TopBar({ themeId, onTheme, onSample, onReset, onDownload, storageOk }: TopBarProps) {
+export function TopBar({
+  themeId, onTheme, onSample, onReset, onDownload, onExport, onImport, storageOk,
+}: TopBarProps) {
   const handleDownload = onDownload ?? (() => window.print());
+  const fileRef = useRef<HTMLInputElement>(null);
 
   return (
     <div className="no-print sticky top-0 z-10">
@@ -69,6 +76,37 @@ export function TopBar({ themeId, onTheme, onSample, onReset, onDownload, storag
           >
             Reset
           </button>
+
+          {/* Export JSON */}
+          <button
+            type="button"
+            onClick={onExport}
+            title="Download your résumé data as a JSON file"
+            className="rounded px-2.5 py-1 text-sm text-[var(--fg-dim)] hover:bg-[var(--border)] hover:text-[var(--fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-2"
+          >
+            Export
+          </button>
+
+          {/* Import JSON */}
+          <button
+            type="button"
+            onClick={() => fileRef.current?.click()}
+            title="Load a résumé from a JSON file"
+            className="rounded px-2.5 py-1 text-sm text-[var(--fg-dim)] hover:bg-[var(--border)] hover:text-[var(--fg)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--focus)] focus-visible:outline-offset-2"
+          >
+            Import
+          </button>
+          <input
+            ref={fileRef}
+            type="file"
+            accept="application/json,.json"
+            hidden
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) onImport(file);
+              e.target.value = ''; // allow re-importing the same file
+            }}
+          />
 
           {/* Download PDF (primary) */}
           <button
