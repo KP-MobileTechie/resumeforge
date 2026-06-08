@@ -3,7 +3,7 @@
 [![CI](https://github.com/KP-MobileTechie/resumeforge/actions/workflows/ci.yml/badge.svg)](https://github.com/KP-MobileTechie/resumeforge/actions/workflows/ci.yml)
 
 Build a clean résumé in the browser and export it to a real PDF. Fill a structured form,
-watch a live A4 preview update as you type, switch between three print-ready themes, and
+watch a live A4 preview update as you type, switch between four print-ready themes, and
 download with one click. No sign-up, no backend, your data stays in your browser.
 
 <!-- TODO(manual): record demo GIF with ScreenToGif and replace this line -->
@@ -14,10 +14,11 @@ download with one click. No sign-up, no backend, your data stays in your browser
 
 | | |
 |---|---|
-| 📝 **Structured form** | Profile, experience, education, projects, skills, with add / remove / reorder |
+| 📝 **Structured form** | Profile, experience, education, projects, skills, with add / remove / reorder / duplicate |
 | 📄 **Live A4 preview** | A true 210x297mm page that updates as you type |
-| 🎨 **Three themes** | Classic (serif), Modern (accent rule), Compact (two-column skills) |
+| 🎨 **Four themes** | Classic (serif), Modern (accent rule), Compact (two-column skills), Minimal (monochrome) |
 | 🖨 **Real PDF export** | Browser print-to-PDF: selectable text, embedded fonts, vector crisp, ATS-parseable |
+| 🔁 **JSON export / import** | Back up your résumé data to a file and load it on any device, no account |
 | 💾 **Autosave** | Everything persists to localStorage, no account needed |
 | ♿ **Accessible** | Keyboard operable, labelled fields, respects reduced-motion |
 
@@ -61,8 +62,9 @@ lib/themes.ts           theme token registry                        (pure)
 lib/storage.ts          versioned localStorage (sole storage access)
 hooks/useResume.ts      reducer: edits, reorder, theme, sample, reset
 components/form/         form panel and reusable entry lists
-components/preview/      A4 preview and the three theme renderers
-tests/lib/              18 Vitest tests (model, storage, themes, reducer)
+components/preview/      A4 preview and the four theme renderers
+lib/transfer.ts          JSON export / import of résumé data          (pure)
+tests/lib/              26 Vitest tests (model, storage, themes, reducer, transfer)
 ```
 
 ## Run locally
