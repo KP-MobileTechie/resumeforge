@@ -35,6 +35,7 @@ export function ProjectsForm({ items, dispatch }: ProjectsFormProps) {
           title={entry.name || 'New project'}
           onMoveUp={() => dispatch({ type: 'REORDER', section: 'projects', id: entry.id, dir: 'up' })}
           onMoveDown={() => dispatch({ type: 'REORDER', section: 'projects', id: entry.id, dir: 'down' })}
+          onDuplicate={() => dispatch({ type: 'DUPLICATE_ENTRY', section: 'projects', id: entry.id })}
           onRemove={() => dispatch({ type: 'REMOVE_ENTRY', section: 'projects', id: entry.id })}
         >
           <Field label="Name" value={entry.name} onChange={(v) => patch(entry.id, { name: v })} placeholder="Project name" />

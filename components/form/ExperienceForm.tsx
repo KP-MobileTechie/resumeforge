@@ -35,6 +35,7 @@ export function ExperienceForm({ items, dispatch }: ExperienceFormProps) {
           title={entry.role || 'New role'}
           onMoveUp={() => dispatch({ type: 'REORDER', section: 'experience', id: entry.id, dir: 'up' })}
           onMoveDown={() => dispatch({ type: 'REORDER', section: 'experience', id: entry.id, dir: 'down' })}
+          onDuplicate={() => dispatch({ type: 'DUPLICATE_ENTRY', section: 'experience', id: entry.id })}
           onRemove={() => dispatch({ type: 'REMOVE_ENTRY', section: 'experience', id: entry.id })}
         >
           <Field label="Role" value={entry.role} onChange={(v) => patch(entry.id, { role: v })} placeholder="Job title" />

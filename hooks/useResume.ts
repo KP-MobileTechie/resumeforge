@@ -2,9 +2,13 @@
 
 import { useReducer } from 'react';
 import {
-  emptyResume, sampleResume, emptyExperience, emptyEducation, emptyProject, emptySkillGroup,
+  emptyResume, sampleResume, emptyExperience, emptyEducation, emptyProject, emptySkillGroup, newId,
   type Resume, type Profile,
 } from '@/lib/resume';
+
+const ID_PREFIX: Record<ListSection, string> = {
+  experience: 'exp', education: 'edu', projects: 'prj', skills: 'skl',
+};
 
 export type ListSection = 'experience' | 'education' | 'projects' | 'skills';
 
@@ -12,6 +16,7 @@ export type ResumeAction =
   | { type: 'SET_PROFILE_FIELD'; field: keyof Profile; value: string }
   | { type: 'ADD_ENTRY'; section: ListSection }
   | { type: 'REMOVE_ENTRY'; section: ListSection; id: string }
+  | { type: 'DUPLICATE_ENTRY'; section: ListSection; id: string }
   | { type: 'UPDATE_ENTRY'; section: ListSection; id: string; patch: Record<string, unknown> }
   | { type: 'REORDER'; section: ListSection; id: string; dir: 'up' | 'down' }
   | { type: 'SET_THEME'; themeId: string }
@@ -44,6 +49,14 @@ export function reducer(state: Resume, action: ResumeAction): Resume {
       return { ...state, [action.section]: [...state[action.section], makeEntry(action.section)] } as Resume;
     case 'REMOVE_ENTRY':
       return { ...state, [action.section]: (state[action.section] as { id: string }[]).filter((e) => e.id !== action.id) } as Resume;
+    case 'DUPLICATE_ENTRY': {
+      const list = state[action.section] as { id: string }[];
+      const idx = list.findIndex((e) => e.id === action.id);
+      if (idx === -1) return state;
+      const clone = { ...structuredClone(list[idx]), id: newId(ID_PREFIX[action.section]) };
+      const next = [...list.slice(0, idx + 1), clone, ...list.slice(idx + 1)];
+      return { ...state, [action.section]: next } as Resume;
+    }
     case 'UPDATE_ENTRY':
       return { ...state, [action.section]: (state[action.section] as { id: string }[]).map((e) => e.id === action.id ? { ...e, ...action.patch } : e) } as Resume;
     case 'REORDER': {

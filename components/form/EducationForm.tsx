@@ -34,6 +34,7 @@ export function EducationForm({ items, dispatch }: EducationFormProps) {
           title={entry.degree || 'New entry'}
           onMoveUp={() => dispatch({ type: 'REORDER', section: 'education', id: entry.id, dir: 'up' })}
           onMoveDown={() => dispatch({ type: 'REORDER', section: 'education', id: entry.id, dir: 'down' })}
+          onDuplicate={() => dispatch({ type: 'DUPLICATE_ENTRY', section: 'education', id: entry.id })}
           onRemove={() => dispatch({ type: 'REMOVE_ENTRY', section: 'education', id: entry.id })}
         >
           <Field label="Degree" value={entry.degree} onChange={(v) => patch(entry.id, { degree: v })} placeholder="B.Sc. Computer Science" />

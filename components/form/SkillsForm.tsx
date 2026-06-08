@@ -34,6 +34,7 @@ export function SkillsForm({ items, dispatch }: SkillsFormProps) {
           title={entry.category || 'New group'}
           onMoveUp={() => dispatch({ type: 'REORDER', section: 'skills', id: entry.id, dir: 'up' })}
           onMoveDown={() => dispatch({ type: 'REORDER', section: 'skills', id: entry.id, dir: 'down' })}
+          onDuplicate={() => dispatch({ type: 'DUPLICATE_ENTRY', section: 'skills', id: entry.id })}
           onRemove={() => dispatch({ type: 'REMOVE_ENTRY', section: 'skills', id: entry.id })}
         >
           <Field

@@ -7,6 +7,20 @@ describe('resume reducer', () => {
     const s = reducer(emptyResume(), { type: 'SET_PROFILE_FIELD', field: 'name', value: 'Avery' });
     expect(s.profile.name).toBe('Avery');
   });
+  it('duplicates an entry with a new id, inserted right after, deep-cloned', () => {
+    let s = reducer(emptyResume(), { type: 'ADD_ENTRY', section: 'experience' });
+    const id = s.experience[0].id;
+    s = reducer(s, { type: 'UPDATE_ENTRY', section: 'experience', id, patch: { role: 'Engineer', bullets: ['a'] } });
+    s = reducer(s, { type: 'DUPLICATE_ENTRY', section: 'experience', id });
+    expect(s.experience).toHaveLength(2);
+    expect(s.experience[1].role).toBe('Engineer');
+    expect(s.experience[1].id).not.toBe(id);
+    expect(s.experience[1].bullets).not.toBe(s.experience[0].bullets); // deep-cloned
+  });
+  it('duplicate of a missing id is a no-op', () => {
+    const s = reducer(emptyResume(), { type: 'DUPLICATE_ENTRY', section: 'experience', id: 'nope' });
+    expect(s.experience).toHaveLength(0);
+  });
   it('adds an entry with an id', () => {
     const s = reducer(emptyResume(), { type: 'ADD_ENTRY', section: 'experience' });
     expect(s.experience).toHaveLength(1);
